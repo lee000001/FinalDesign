@@ -16,12 +16,12 @@ public class ListAdapter  extends BaseAdapter {
     public List<Entity> list;
     private Context context;
     private LayoutInflater inflater;
-    private OnModifyClick onModifyClick;
+    private OnItemClick onItemClick;
 
-    public ListAdapter(Context context,List<Entity> list,OnModifyClick onModifyClick ) {
+    public ListAdapter(Context context,List<Entity> list,OnItemClick onItemClick ) {
         this.list = list;
         this.context = context;
-        this.onModifyClick=onModifyClick;
+        this.onItemClick=onItemClick;
         inflater=LayoutInflater.from(context);
     }
 
@@ -74,7 +74,7 @@ public class ListAdapter  extends BaseAdapter {
                 list.get(position).setAccount(holder.et_account.getText().toString());
                 list.get(position).setName(holder.et_name.getText().toString());
                 list.get(position).setEdit(false);
-
+                onItemClick.onModify(position,entity);
                 refresh();
 
             }
@@ -84,6 +84,7 @@ public class ListAdapter  extends BaseAdapter {
             public void onClick(View v) {
                list.remove(position);
                 list.get(position).setEdit(false);
+                onItemClick.onDelete(position,entity);
                 refresh();
 
             }
@@ -138,9 +139,7 @@ public class ListAdapter  extends BaseAdapter {
             this.view=view;
         }
     }
-    public interface  OnModifyClick{
-        void onModify(int index);
-    }
+
 
     class ViewHolder_show{
 
@@ -159,4 +158,9 @@ public class ListAdapter  extends BaseAdapter {
         }
     }
 
+    public interface  OnItemClick{
+        void onModify(int index,Entity entity);
+        void onDelete(int index,Entity entity);
+
+    }
 }
