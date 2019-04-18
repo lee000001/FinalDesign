@@ -141,7 +141,7 @@ public class TaskDetailActivity extends UI {
 
     }
     private void initAdapter() {
-        dataAdapter=new MemberAdapter(this,datas);
+        dataAdapter=new MemberAdapter(this,datas,false);
         recyclerView.setAdapter(dataAdapter);
     }
 
