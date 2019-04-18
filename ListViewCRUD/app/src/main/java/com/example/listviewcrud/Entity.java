@@ -3,6 +3,18 @@ package com.example.listviewcrud;
 public class Entity {
     private String name;
     private String account;
+    private boolean isEdit=false;
+
+    public boolean isEdit() {
+        return isEdit;
+    }
+
+    public void setEdit(boolean edit) {
+        isEdit = edit;
+    }
+
+
+
 
     public Entity(String name, String account) {
         this.name = name;
